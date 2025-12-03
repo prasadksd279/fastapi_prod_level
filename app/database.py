@@ -7,10 +7,10 @@ from sqlalchemy.orm import sessionmaker, DeclarativeBase
 load_dotenv()
 
 
-# SQLALCHEMY_DATABASE_URL = f"postgresql+psycopg://{settings.db_uname}:{settings.db_pass}@{settings.db_host}/{settings.db_name}"
+SQLALCHEMY_DATABASE_URL = f"postgresql+psycopg://{settings.db_uname}:{settings.db_pass}@{settings.db_host}/{settings.db_name}"
 
-SQLALCHEMY_DATABASE_URL = settings.database_url
-assert SQLALCHEMY_DATABASE_URL is not None, "database url is missing"
+# SQLALCHEMY_DATABASE_URL = settings.database_url
+# assert SQLALCHEMY_DATABASE_URL is not None, "database url is missing"
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=False)
 
