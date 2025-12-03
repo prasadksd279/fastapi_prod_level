@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .database import Base, engine
+from .database import engine, Base
 from .routers import auth, post, user, vote
 
-# Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -33,4 +33,4 @@ app.include_router(vote.router)
 # home
 @app.get("/")
 async def hello():
-    return {"hello": "world"}
+    return {"hello": "worlds of both"}

@@ -1,0 +1,30 @@
+services:
+  api:
+    image: prasadksd/fastapi
+    container_name: fastapi-api
+    ports:
+      - "80:8000"
+    env_file:
+      - .env
+    # environment:
+    #   DATABASE_URL: "postgresql+psycopg://postgres:postgres@db:5432/fastapi"
+    depends_on:
+      - db
+    volumes:
+      - ./:/usr/src/app:ro
+    # command: uvicorn app.app:app --host 0.0.0.0 --port 8000 --reload
+
+  db:
+    image: postgres:15
+    container_name: fastapi-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: fastapi
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

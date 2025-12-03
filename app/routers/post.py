@@ -1,4 +1,3 @@
-from unittest import result
 from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy import func
 from sqlalchemy.orm import Session
@@ -31,7 +30,7 @@ def get_posts(
 
 
 # create post
-@router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.PostOut)
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)
 def create_posts(
     post: schemas.PostCreate,
     db: Session = Depends(database.get_db),
@@ -98,7 +97,7 @@ def delete_post(
 
 
 # update post
-@router.put("/{id}", response_model=schemas.PostOut)
+@router.put("/{id}", response_model=schemas.Post)
 def update_posts(
     id: int,
     updated_post: schemas.PostUpdate,
@@ -121,4 +120,6 @@ def update_posts(
 
     post_query.update(updated_post.model_dump(), synchronize_session=False)
     db.commit()
-    return post_query.first()
+    db.refresh(post)
+    # return post_query.first()
+    return post
