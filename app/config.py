@@ -12,7 +12,7 @@ class Settings(BaseSettings):
 
     secret_key: str | None = None
     algorithm: str = "HS256"
-    access_token_expire_minutes: int | None = None
+    access_token_expire_minutes: float | None = None
 
     model_config = SettingsConfigDict(env_file=".env")
 

@@ -8,7 +8,7 @@ jobs:
             DB_HOST: localhost
             DB_PORT: 5432
             DB_UNAME: postgres
-            DB_PASS: rootroot
+            DB_PASS: ${{DB_PASS}}
             DB_NAME: fastapi
             SECRET_KEY: ec62eb0c2e71708513d4e9fc7cb44d022ae629bc60c2aa931d9b4c76133001bd
             ALGORITHM: HS256
