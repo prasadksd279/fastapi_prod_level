@@ -13,6 +13,19 @@ jobs:
             SECRET_KEY: ec62eb0c2e71708513d4e9fc7cb44d022ae629bc60c2aa931d9b4c76133001bd
             ALGORITHM: HS256
             ACCESS_TOKEN_EXPIRE_MINUTES: 30
+        services:
+            postgres:
+                image: postgres
+                env:
+                    POSTGRES_PASSWORD: ${{secrets.DB_PASS}}
+                ports:
+                    - 5432:5432
+                # Set health checks to wait until postgres has started
+                options: >-
+                    -- health-cmd pg_isready
+                    -- health-interval 10s
+                    -- health-timeout 5s
+                    -- health-retries 5
         runs-on: ubuntu-latest
         # steps:
         #     - name: pulling git repo
